@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Scenes/Testing voxels V1 (2d objects).unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
