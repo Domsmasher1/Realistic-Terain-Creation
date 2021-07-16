@@ -17,18 +17,18 @@ public class Chunk : MonoBehaviour
 
     private int faceCount;
 
-    public GameObject worldGO;
-    private World world;
+    public GameObject TerrainHandelerGO;
+    private TerrainHandeler TerrainHandeler;
 
     public int chunkSize = 16;
 
     void Start()
     {
-        world = worldGO.GetComponent("World") as World;
+        TerrainHandeler = TerrainHandelerGO.GetComponent("TerrainHandeler") as TerrainHandeler;
 
         mesh = GetComponent<MeshFilter>().mesh;
         col = GetComponent<MeshCollider>();
-        world.block(0, 0, 0);
+        TerrainHandeler.Block(0, 0, 0);
         CubeTop(0, 0, 0, 0);
         CubeNorth(0, 0, 0, 0);
         CubeSouth(0, 0, 0, 0);
@@ -49,48 +49,48 @@ public class Chunk : MonoBehaviour
                 {
                     //This code will run for every block in the chunk
 
-                    if (world.Block(x, y, z) != 0)
+                    if (TerrainHandeler.Block(x, y, z) != 0)
                     {
                         //If the block is solid
 
-                        if (world.Block(x, y + 1, z) == 0)
+                        if (TerrainHandeler.Block(x, y + 1, z) == 0)
                         {
                             //Block above is air
-                            CubeTop(x, y, z, world.Block(x, y, z));
+                            CubeTop(x, y, z, TerrainHandeler.Block(x, y, z));
                         }
 
-                        if (world.Block(x, y - 1, z) == 0)
+                        if (TerrainHandeler.Block(x, y - 1, z) == 0)
                         {
                             //Block below is air
-                            CubeBot(x, y, z, world.Block(x, y, z));
+                            CubeBot(x, y, z, TerrainHandeler.Block(x, y, z));
 
                         }
 
-                        if (world.Block(x + 1, y, z) == 0)
+                        if (TerrainHandeler.Block(x + 1, y, z) == 0)
                         {
                             //Block east is air
-                            CubeEast(x, y, z, world.Block(x, y, z));
+                            CubeEast(x, y, z, TerrainHandeler.Block(x, y, z));
 
                         }
 
-                        if (world.Block(x - 1, y, z) == 0)
+                        if (TerrainHandeler.Block(x - 1, y, z) == 0)
                         {
                             //Block west is air
-                            CubeWest(x, y, z, world.Block(x, y, z));
+                            CubeWest(x, y, z, TerrainHandeler.Block(x, y, z));
 
                         }
 
-                        if (world.Block(x, y, z + 1) == 0)
+                        if (TerrainHandeler.Block(x, y, z + 1) == 0)
                         {
                             //Block north is air
-                            CubeNorth(x, y, z, world.Block(x, y, z));
+                            CubeNorth(x, y, z, TerrainHandeler.Block(x, y, z));
 
                         }
 
-                        if (world.Block(x, y, z - 1) == 0)
+                        if (TerrainHandeler.Block(x, y, z - 1) == 0)
                         {
                             //Block south is air
-                            CubeSouth(x, y, z, world.Block(x, y, z));
+                            CubeSouth(x, y, z, TerrainHandeler.Block(x, y, z));
 
                         }
 

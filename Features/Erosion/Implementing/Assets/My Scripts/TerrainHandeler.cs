@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class World : MonoBehaviour
+public class TerrainHandeler: MonoBehaviour
 {
     public byte[,,] data;
-    public int worldX = 16;
-    public int worldY = 16;
-    public int worldZ = 16;
+    public int TerrainHandelerX = 16;
+    public int TerrainHandelerY = 16;
+    public int TerrainHandelerZ = 16;
 
-    public GameObject worldGO;
-    private World world;
+    public byte Block(int x, int y, int z)
+    {
+
+        if (x >= TerrainHandelerX || x < 0 || y >= TerrainHandelerY || y < 0 || z >= TerrainHandelerZ || z < 0)
+        {
+            return (byte)1;
+        }
+
+        return data[x, y, z];
+    }
 
     void Start()
     {
-        data = new byte[worldX, worldY, worldZ];
+        data = new byte[TerrainHandelerX, TerrainHandelerY, TerrainHandelerZ];
 
-        for (int x = 0; x < worldX; x++)
+        for (int x = 0; x < TerrainHandelerX; x++)
         {
-            for (int y = 0; y < worldY; y++)
+            for (int y = 0; y < TerrainHandelerY; y++)
             {
-                for (int z = 0; z < worldZ; z++)
+                for (int z = 0; z < TerrainHandelerZ; z++)
                 {
 
                     if (y <= 8)
