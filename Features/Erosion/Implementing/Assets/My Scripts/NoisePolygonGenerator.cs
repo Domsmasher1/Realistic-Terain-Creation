@@ -31,8 +31,6 @@ public class NoisePolygonGenerator : MonoBehaviour
     // Bytes
     public byte[,] blocks; // 2d array to store block info
 
-    // Boolens
-    public bool update = false;
 
     void UpdateMesh()
     {
@@ -108,14 +106,12 @@ public class NoisePolygonGenerator : MonoBehaviour
                     if (Noise(px, py, 12, 16, 1) > 10)
                     {
                         blocks[px, py] = 3;
-
                     }
 
                     //The next three lines remove dirt and rock to make caves in certain places
                     if (Noise(px, py * 2, 16, 14, 1) > 10)
                     { //Caves
                         blocks[px, py] = 4;
-
                     }
 
                 }
@@ -123,8 +119,6 @@ public class NoisePolygonGenerator : MonoBehaviour
                 {
                     blocks[px, py] = 2;
                 }
-
-
             }
         }
     }
@@ -239,11 +233,7 @@ public class NoisePolygonGenerator : MonoBehaviour
     }
     void Update()
     {
-        if (update)
-        {
-            BuildMesh();
-            UpdateMesh();
-            update = false;
-        }
+        BuildMesh();
+        UpdateMesh();
     }
 }
