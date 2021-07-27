@@ -9,8 +9,8 @@ public class Chunk : MonoBehaviour
     private List<Vector2> newUV = new List<Vector2>();
 
     private float tUnit = 0.25f;
-    private Vector2 tStone = new Vector2(1, 0);
-    private Vector2 tGrass = new Vector2(0, 1);
+    private Vector2 tStone = new Vector2(3, 2);
+    private Vector2 tGrass = new Vector2(0, 3);
 
     private Mesh mesh;
     private MeshCollider col;
@@ -28,97 +28,73 @@ public class Chunk : MonoBehaviour
 
         mesh = GetComponent<MeshFilter>().mesh;
         col = GetComponent<MeshCollider>();
-        TerrainHandeler.Block(0, 0, 0);
         CubeTop(0, 0, 0, 0);
         CubeNorth(0, 0, 0, 0);
         CubeSouth(0, 0, 0, 0);
         CubeEast(0, 0, 0, 0);
         CubeWest(0, 0, 0, 0);
         CubeBot(0, 0, 0, 0);
-        UpdateMesh();
+        CubeTop(0, 0, 0, 0);
+        GenerateMesh();
     }
 
     void GenerateMesh()
     {
-
-        for (int x = 0; x < chunkSize; x++)
+        for (int x = 0; x < TerrainHandeler.TerrainHandelerX; x++) //If x is smaller then the chunk size, then add one to x (x++)
         {
-            for (int y = 0; y < chunkSize; y++)
+            for (int y = 0; y < TerrainHandeler.TerrainHandelerY; y++) //If y is smaller then the chunk size, then add one to y (y++)
             {
-                for (int z = 0; z < chunkSize; z++)
+                for (int z = 0; z < TerrainHandeler.TerrainHandelerZ; z++) //If z is smaller then the chunk size, then add one to z (z++)
                 {
                     //This code will run for every block in the chunk
-
                     if (TerrainHandeler.Block(x, y, z) != 0)
                     {
-                        //If the block is solid
-
-                        if (TerrainHandeler.Block(x, y + 1, z) == 0)
+                        if (TerrainHandeler.Block(x, y + 1, z) == 0) //If the block is solid
                         {
-                            //Block above is air
-                            CubeTop(x, y, z, TerrainHandeler.Block(x, y, z));
+                            CubeTop(x, y, z, TerrainHandeler.Block(x, y, z)); //Block above is air, so create mesh face
                         }
-
-                        if (TerrainHandeler.Block(x, y - 1, z) == 0)
+                        if (TerrainHandeler.Block(x, y - 1, z) == 0) //If the block is solid 
                         {
-                            //Block below is air
-                            CubeBot(x, y, z, TerrainHandeler.Block(x, y, z));
-
+                            CubeBot(x, y, z, TerrainHandeler.Block(x, y, z)); //Block below is air, so create mesh face
                         }
-
-                        if (TerrainHandeler.Block(x + 1, y, z) == 0)
+                        if (TerrainHandeler.Block(x + 1, y, z) == 0 || (x == TerrainHandeler.TerrainHandelerX-1)) //If the block is solid or is the last block
                         {
-                            //Block east is air
-                            CubeEast(x, y, z, TerrainHandeler.Block(x, y, z));
-
+                            CubeEast(x, y, z, TerrainHandeler.Block(x, y, z)); //Block east is air, so create mesh face
                         }
-
-                        if (TerrainHandeler.Block(x - 1, y, z) == 0)
+                        if (TerrainHandeler.Block(x - 1, y, z) == 0 || (x == 0)) //If the block is solid or is the first block
                         {
-                            //Block west is air
-                            CubeWest(x, y, z, TerrainHandeler.Block(x, y, z));
-
+                            CubeWest(x, y, z, TerrainHandeler.Block(x, y, z)); //Block west is air, so create mesh face
                         }
-
-                        if (TerrainHandeler.Block(x, y, z + 1) == 0)
+                        if (TerrainHandeler.Block(x, y, z + 1) == 0 || (z == TerrainHandeler.TerrainHandelerZ-1)) //If the block is solid or is the last block
                         {
-                            //Block north is air
-                            CubeNorth(x, y, z, TerrainHandeler.Block(x, y, z));
-
+                            CubeNorth(x, y, z, TerrainHandeler.Block(x, y, z)); //Block north is air, so create mesh face
                         }
-
-                        if (TerrainHandeler.Block(x, y, z - 1) == 0)
+                        if (TerrainHandeler.Block(x, y, z - 1) == 0 || (z == 0)) //If the block is solid or is the first block
                         {
-                            //Block south is air
-                            CubeSouth(x, y, z, TerrainHandeler.Block(x, y, z));
-
+                            CubeSouth(x, y, z, TerrainHandeler.Block(x, y, z)); //Block south is air, so create mesh face
                         }
-
                     }
-
                 }
             }
         }
-
-        UpdateMesh();
+    UpdateMesh();
     }
 
-    void CubeTop(int x, int y, int z, byte block)
+    void CubeTop(int x, int y, int z, byte block)  //Creates the top face of the cube out of triangles
     {
-
         newVertices.Add(new Vector3(x, y, z + 1));
         newVertices.Add(new Vector3(x + 1, y, z + 1));
         newVertices.Add(new Vector3(x + 1, y, z));
         newVertices.Add(new Vector3(x, y, z));
 
         Vector2 texturePos;
-
+        print("CubeTop xyz" + x + " " + y + " " + z);
         texturePos = tStone;
 
         Cube(texturePos);
     }
 
-    void CubeNorth(int x, int y, int z, byte block)
+    void CubeNorth(int x, int y, int z, byte block) //Creates the north face of the cube out of triangles
     {
         newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
         newVertices.Add(new Vector3(x + 1, y, z + 1));
@@ -132,7 +108,7 @@ public class Chunk : MonoBehaviour
         Cube(texturePos);
     }
 
-    void CubeEast(int x, int y, int z, byte block)
+    void CubeEast(int x, int y, int z, byte block) //Creates the east face of the cube out of triangles
     {
         newVertices.Add(new Vector3(x + 1, y - 1, z));
         newVertices.Add(new Vector3(x + 1, y, z));
@@ -145,7 +121,7 @@ public class Chunk : MonoBehaviour
 
         Cube(texturePos);
     }
-    void CubeSouth(int x, int y, int z, byte block)
+    void CubeSouth(int x, int y, int z, byte block) //Creates the south face of the cube out of triangles
     {
         newVertices.Add(new Vector3(x, y - 1, z));
         newVertices.Add(new Vector3(x, y, z));
@@ -158,7 +134,7 @@ public class Chunk : MonoBehaviour
 
         Cube(texturePos);
     }
-    void CubeWest(int x, int y, int z, byte block)
+    void CubeWest(int x, int y, int z, byte block) //Creates the west face of the cube out of triangles
     {
         newVertices.Add(new Vector3(x, y - 1, z + 1));
         newVertices.Add(new Vector3(x, y, z + 1));
@@ -171,7 +147,7 @@ public class Chunk : MonoBehaviour
 
         Cube(texturePos);
     }
-    void CubeBot(int x, int y, int z, byte block)
+    void CubeBot(int x, int y, int z, byte block) //Creates the bottom face of the cube out of triangles
     {
         newVertices.Add(new Vector3(x, y - 1, z));
         newVertices.Add(new Vector3(x + 1, y - 1, z));
@@ -188,7 +164,6 @@ public class Chunk : MonoBehaviour
 
     void Cube(Vector2 texturePos)
     {
-
         newTriangles.Add(faceCount * 4); //1
         newTriangles.Add(faceCount * 4 + 1); //2
         newTriangles.Add(faceCount * 4 + 2); //3
@@ -222,8 +197,9 @@ public class Chunk : MonoBehaviour
 
         faceCount = 0;
     }
+
     void Update()
     {
-        
+
     }
 }

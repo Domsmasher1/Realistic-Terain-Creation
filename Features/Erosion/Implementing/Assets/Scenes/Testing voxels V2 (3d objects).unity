@@ -373,6 +373,9 @@ MonoBehaviour:
   TerrainHandelerX: 16
   TerrainHandelerY: 16
   TerrainHandelerZ: 16
+  HightLimit: 8
+  chunk: {fileID: 1160373775}
+  chunkSize: 16
 --- !u!1 &1160373775
 GameObject:
   m_ObjectHideFlags: 0

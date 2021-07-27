@@ -80,7 +80,7 @@ public class NoisePolygonGenerator : MonoBehaviour
     }
     void GenTerrain()
     {
-        blocks = new byte[384, 128]; // First value how long the wall is, Seccond value how high the wall is (x,y)
+        blocks = new byte[100, 200]; // First value how long the wall is, Seccond value how high the wall is (x,y)
 
         for (int px = 0; px < blocks.GetLength(0); px++)
         {
