@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+render_mode specular_toon;
+uniform sampler2D noise;
+uniform float height_scale = 0.5;
+uniform sampler2D normalmap;
+varying vec2 tex_position;
+
+float height(vec2 position){
+	//tex_position = position.xy / 2.0 + 0.5;
+	float height = texture(noise, position.xy / 2.0 + 0.5).x;
+	position.y += height * height_scale;
+	return texture(noise, position / 10.0).x;
+}
+
+void vertex(){
+	tex_position = VERTEX.xz / 2.0 + 0.5;
+	vec2 pos = VERTEX.xz;
+	float k = height(pos);
+	VERTEX.y = k * height_scale;
+	//float height = texture(noise, VERTEX.xz / 2.0 + 0.5).x;
+	//VERTEX.y += height * height_scale;
+}
+
+void fragment(){
+	NORMALMAP = texture(normalmap, tex_position).xyz;
+	float fresnel = sqrt(1.0 - dot(NORMAL, VIEW));
+	RIM = 0.2;
+	METALLIC = 0.0;
+	ROUGHNESS = 0.01 * (1.0 - fresnel);
+	ALBEDO = vec3(0.01, 0.03, 0.05) + (0.1 * fresnel);
+}
+
+"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+noise = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+
+[sub_resource type="NoiseTexture" id=6]
+as_normalmap = true
+noise = SubResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 2 )
+shader_param/height_scale = 0.5
+shader_param/noise = SubResource( 4 )
+shader_param/normalmap = SubResource( 6 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.948473, 0.316858, 0, -0.316858, 0.948473, 0, 1.30738, 2.34463 )
