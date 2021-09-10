@@ -1,4 +1,0 @@
-Plan:
-Random rain will be formed over ocean (no mass will be removed from the ocean) and will then randomly move on a timer, when its timer ends, 
-it will try look for a path that reaches a lake, river or the sea, and move to a position where it can release rain where it will make it 
-to the river then let the rain out. If it cannot find a path, it will rain down and create a lake.
