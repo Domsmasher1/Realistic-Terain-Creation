@@ -3,7 +3,6 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraController
     - Chunk
-    - Curserlock
     - ModifyTerrain
     - PauseMenu
     - World
@@ -51,33 +50,31 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 5076}
+      Script: {instanceID: 1502}
     - Class: 114
-      Script: {instanceID: 5168}
+      Script: {instanceID: 1596}
     - Class: 114
-      Script: {instanceID: 5240}
+      Script: {instanceID: 1668}
     - Class: 114
-      Script: {instanceID: 5538}
+      Script: {instanceID: 1976}
     - Class: 114
-      Script: {instanceID: 5812}
+      Script: {instanceID: 2122}
     - Class: 114
-      Script: {instanceID: 5910}
+      Script: {instanceID: 2254}
     - Class: 114
-      Script: {instanceID: 6054}
+      Script: {instanceID: 2356}
     - Class: 114
-      Script: {instanceID: 6232}
+      Script: {instanceID: 2506}
     - Class: 114
-      Script: {instanceID: 6266}
+      Script: {instanceID: 2684}
     - Class: 114
-      Script: {instanceID: 6312}
+      Script: {instanceID: 2718}
     - Class: 114
-      Script: {instanceID: 6366}
+      Script: {instanceID: 2764}
     - Class: 114
-      Script: {instanceID: 7318}
+      Script: {instanceID: 2818}
     - Class: 114
-      Script: {instanceID: 20336}
-    - Class: 114
-      Script: {instanceID: 21666}
+      Script: {instanceID: 3782}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -201,6 +198,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 8abc1bf83b20694176de15c535a33384
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
   - hash:
       serializedVersion: 2
       Hash: a1aa98c78061c6f03a8c124cda576e67
@@ -555,20 +558,8 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
-  - hash:
-      serializedVersion: 2
-      Hash: 000f98eff947a45191cfd09a356ad82a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PauseMenu
-  - hash:
-      serializedVersion: 2
-      Hash: 65a12cab96a62d88d9459ea0e190639c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Curserlock
   platform: 19
   scenePathNames:
   - Assets/Scenes/Testing voxels V2 (3d objects).unity
-  playerPath: C:/Users/Dominic/Desktop/Realistic-Terain-Creation/Versions/Mockups
+  playerPath: C:/Users/whi0026/Desktop/Realistic-Terain-Creation/Versions/Mockups
     and semi-functional versions/Erosion/Implementing.exe

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    public static bool ChangeMouse = false;
+    public bool lockCursor = true;
 
     public GameObject pauseMenuUI;
     public GameObject hitMarkerUI;
@@ -17,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     }
     void Update()
     {
-     if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
@@ -26,7 +28,10 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
+           lockCursor = !lockCursor;
         }
+        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !lockCursor;
     }
     public void Resume ()
     {
@@ -35,6 +40,10 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         hitMarkerUI.SetActive(true);
 
+        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !lockCursor;
+
+        lockCursor = !lockCursor;
     }
     void Pause ()
     {

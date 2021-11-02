@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1424,7 +1424,6 @@ GameObject:
   - component: {fileID: 2110237123}
   - component: {fileID: 2110237122}
   - component: {fileID: 2110237125}
-  - component: {fileID: 2110237126}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1525,18 +1524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9882b0d187501854c810b9e41647c83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockCursor: 1
   pauseMenuUI: {fileID: 1267862844}
   hitMarkerUI: {fileID: 1660231439}
---- !u!114 &2110237126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110237120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3cf022b25974454088efb392e5f39c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockCursor: 1
